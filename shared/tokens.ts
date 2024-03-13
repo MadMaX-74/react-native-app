@@ -5,7 +5,8 @@ export const Colors = {
     primaryHover: '#452481',
     link: '#A97BFF',
     grey: '#AFB2BF',
-    white: '#FAFAFA'
+    white: '#FAFAFA',
+    red: '#CC384E'
 }
 export const Gaps = {
     g16: 16,

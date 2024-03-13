@@ -5,8 +5,7 @@ import EyeOpenedIcon from '../../assets/icons/eye-opened'
 import EyeClosedIcon from '../../assets/icons/eye-closed'
 
 const Input = (props: TextInputProps & {isPassword?: boolean}) => {
-
-    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
   return (
     <View>
      <TextInput 
