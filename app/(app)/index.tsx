@@ -1,27 +1,28 @@
-import { StyleSheet, View, Image } from 'react-native';
-import Input from '../../shared/Input/Input';
+import { StyleSheet, View, Text } from 'react-native';
 import { Colors, Gaps } from '../../shared/tokens';
-import Button from '../../shared/Button/Button';
-import { ErrorNotification } from '../../shared/ErrorNotification/ErrorNotification';
-import { useState } from 'react';
-import CustomLink from '../../shared/CustomLink/CustomLink';
+import { useAtom } from 'jotai';
+import { profileAtom } from '../../entities/user/model/user.state';
+import axios from 'axios';
+import { API } from '../../entities/auth/api/auth.api';
+import { useEffect } from 'react';
+import { AuthResponse } from '../../entities/auth/model/auth.interface';
 
 export default function App() {
-	const [error, setError] = useState<string | undefined>(undefined);
-	const alert = () => {
-		setError('Wrong login and password');
+	const [profile] = useAtom(profileAtom);
+	const login = async () => {
+		const { data } = await axios.post<AuthResponse>(API.login, {
+			email: 'vasia@pupkin.ru',
+			password: '12345678',
+		});
+		console.log(data);
 	};
+	useEffect(() => {
+		login();
+	}, []);
 	return (
 		<View style={styles.container}>
-			<ErrorNotification error={error} />
 			<View style={styles.content}>
-				<Image style={styles.logo} source={require('../../assets/logo.png')} resizeMode="contain" />
-				<View style={styles.form}>
-					<Input placeholder="Email" />
-					<Input isPassword placeholder="Password" />
-					<Button text="Войти" onPress={alert} />
-				</View>
-				<CustomLink href={'/restore'} text="Востановить пароль" />
+				<Text style={{ color: Colors.white }}>{profile.isLoading}</Text>
 			</View>
 		</View>
 	);
@@ -37,12 +38,5 @@ const styles = StyleSheet.create({
 	content: {
 		alignItems: 'center',
 		gap: Gaps.g50,
-	},
-	form: {
-		alignSelf: 'stretch',
-		gap: Gaps.g16,
-	},
-	logo: {
-		width: 220,
 	},
 });
