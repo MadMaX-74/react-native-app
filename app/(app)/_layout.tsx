@@ -1,5 +1,5 @@
 import { Stack, SplashScreen } from 'expo-router';
-import { Colors } from '../shared/tokens';
+import { Colors } from '../../shared/tokens';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
@@ -9,8 +9,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 	const [loaded, error] = useFonts({
-		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+		FiraSans: require('../../assets/fonts/FiraSans-Regular.ttf'),
+		FiraSansSemiBold: require('../../assets/fonts/FiraSans-SemiBold.ttf'),
 	});
 
 	useEffect(() => {
@@ -39,8 +39,7 @@ export default function RootLayout() {
 					headerShown: false,
 				}}
 			>
-				<Stack.Screen name="login" />
-				<Stack.Screen name="restore" />
+				<Stack.Screen name="index" />
 			</Stack>
 		</SafeAreaProvider>
 	);
