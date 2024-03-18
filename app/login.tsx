@@ -3,23 +3,49 @@ import Input from '../shared/Input/Input';
 import { Colors, Gaps } from '../shared/tokens';
 import Button from '../shared/Button/Button';
 import { ErrorNotification } from '../shared/ErrorNotification/ErrorNotification';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomLink from '../shared/CustomLink/CustomLink';
+import { useAtom } from 'jotai';
+import { loginAtom } from '../entities/auth/model/auth.state';
+import { router } from 'expo-router';
 
 export default function App() {
-	const [error, setError] = useState<string | undefined>(undefined);
-	const alert = () => {
-		setError('Wrong login and password');
+	const [localError, setLocalError] = useState<string | undefined>(undefined);
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [{ access_token, isLoading, error }, login] = useAtom(loginAtom);
+
+	const submit = () => {
+		if (!email) {
+			setLocalError('Отсутвует email');
+			return;
+		}
+		if (!password) {
+			setLocalError('Отсутвует пароль');
+			return;
+		}
+		login({ email, password });
 	};
+	useEffect(() => {
+		if (error) {
+			setLocalError(error);
+		}
+	}, [error]);
+	useEffect(() => {
+		if (access_token) {
+			router.replace('/');
+		}
+	}, [access_token]);
+
 	return (
 		<View style={styles.container}>
-			<ErrorNotification error={error} />
+			<ErrorNotification error={localError} />
 			<View style={styles.content}>
 				<Image style={styles.logo} source={require('../assets/logo.png')} resizeMode="contain" />
 				<View style={styles.form}>
-					<Input placeholder="Email" />
-					<Input isPassword placeholder="Password" />
-					<Button text="Войти" onPress={alert} />
+					<Input placeholder="Email" onChangeText={setEmail} />
+					<Input isPassword placeholder="Password" onChangeText={setPassword} />
+					<Button text="Войти" onPress={submit} isLoading={isLoading} />
 				</View>
 				<CustomLink href={'/restore'} text="Востановить пароль" />
 			</View>
