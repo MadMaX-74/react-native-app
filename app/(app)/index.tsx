@@ -1,30 +1,36 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { Colors, Gaps } from '../../shared/tokens';
-import { useAtom } from 'jotai';
-import { profileAtom } from '../../entities/user/model/user.state';
-import axios from 'axios';
-import { API } from '../../entities/auth/api/auth.api';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { authAtom, logoutAtom } from '../../entities/auth/model/auth.state';
 import { useEffect } from 'react';
-import { AuthResponse } from '../../entities/auth/model/auth.interface';
+import { router, useRootNavigationState } from 'expo-router';
+import Button from '../../shared/Button/Button';
 
 export default function App() {
-	const [profile] = useAtom(profileAtom);
-	const login = async () => {
-		const { data } = await axios.post<AuthResponse>(API.login, {
-			email: 'vasia@pupkin.ru',
-			password: '12345678',
-		});
-		console.log(data);
-	};
+	// const [auth, login] = useAtom(loginAtom);
+	const logout = useSetAtom(logoutAtom);
+	const { access_token } = useAtomValue(authAtom);
+	const state = useRootNavigationState();
+
+	// const userLogin = () => {
+	// 	login({ email: 'vasia@pupkin.ru', password: '12345678' });
+	// };
 	useEffect(() => {
-		login();
-	}, []);
+		if (!state?.key) return;
+		if (!access_token) {
+			router.replace('/login');
+		}
+	}, [access_token]);
+
 	return (
-		<View style={styles.container}>
-			<View style={styles.content}>
-				<Text style={{ color: Colors.white }}>{profile.isLoading}</Text>
+		<Pressable>
+			<View style={styles.container}>
+				<View style={styles.content}>
+					<Text style={{ color: Colors.white }}>Test</Text>
+					<Button text="Logout" onPress={logout} />
+				</View>
 			</View>
-		</View>
+		</Pressable>
 	);
 }
 
