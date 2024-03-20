@@ -4,11 +4,12 @@ import { Drawer } from 'expo-router/drawer';
 import { useAtomValue } from 'jotai';
 import { authAtom } from '../../entities/auth/model/auth.state';
 import { Colors, Fonts } from '../../shared/tokens';
-import MenuIcon from '../../assets/icons/menu';
+import { MenuButton } from '../../features/layout/ui/MenuButton/MenuButton';
+import { CustomDrawer } from '../../shared/layout/ui/CustomDrawer/CustomDrawer';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+export default function AppLayout() {
 	const { access_token } = useAtomValue(authAtom);
 	if (!access_token) {
 		return <Redirect href={'/login'} />;
@@ -17,6 +18,7 @@ export default function RootLayout() {
 		// eslint-disable-next-line react-native/no-inline-styles
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<Drawer
+				drawerContent={(props) => <CustomDrawer {...props} />}
 				screenOptions={({ navigation }) => ({
 					headerStyle: {
 						backgroundColor: Colors.blackLight,
@@ -24,7 +26,7 @@ export default function RootLayout() {
 						shadowOpacity: 0,
 					},
 					headerLeft: () => {
-						return <MenuIcon />;
+						return <MenuButton navigation={navigation} />;
 					},
 					headerTitleStyle: {
 						color: Colors.white,
