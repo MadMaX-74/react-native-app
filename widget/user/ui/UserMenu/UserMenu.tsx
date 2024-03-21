@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { User } from '../../../../entities/user/model/user.model';
 import { Colors, Fonts, Gaps } from '../../../../shared/tokens';
-// import { Avatar } from '../../../../entities/user/ui/Avatar/Avatar';
+import { Avatar } from '../../../../entities/user/ui/Avatar/Avatar';
 
 export function UserMenu({ user }: { user: User | null }) {
 	if (!user) {
@@ -9,7 +9,7 @@ export function UserMenu({ user }: { user: User | null }) {
 	}
 	return (
 		<View style={styles.container}>
-			{/* <Avatar image={user.photo ?? null} /> */}
+			<Avatar image={user.photo ?? null} />
 			<Text style={styles.name}>
 				{user.name} {user.surname}
 			</Text>

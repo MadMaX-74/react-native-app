@@ -6,11 +6,11 @@ import { useAtom, useSetAtom } from 'jotai';
 import { logoutAtom } from '../../../../entities/auth/model/auth.state';
 import { loadProfileAtom } from '../../../../entities/user/model/user.state';
 import { useEffect } from 'react';
-import { UserMenu } from '../../../user/ui/UserMenu/UserMenu';
 import ProfileIcon from '../../../../assets/icons/menu/profile';
 import { MenuItem } from '../../../../entities/layout/ui/MenuItem/MenuItem';
 import CoursesIcon from '../../../../assets/icons/menu/courses';
-import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer.ios';
+import { UserMenu } from '../../../user/ui/UserMenu/UserMenu';
+import { CloseDrawer } from '../../../../features/layout/ui/CloseDrawer/CloseDrawer';
 
 const MENU = [
 	{ text: 'Курсы', icon: <CoursesIcon />, path: 'index' },
