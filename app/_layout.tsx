@@ -9,8 +9,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 	const [loaded, error] = useFonts({
-		FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-		FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf'),
+		'FiraSans-Regular': require('../assets/fonts/FiraSans-Regular.ttf'),
+		'FiraSans-SemiBold': require('../assets/fonts/FiraSans-SemiBold.ttf'),
 	});
 
 	useEffect(() => {
