@@ -41,8 +41,10 @@ export default function Profile() {
 				<Avatar image={image} />
 				<ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
 			</View>
-			<Button text="Сохранить" onPress={submitProfile} />
-			<Button text="Поделиться" onPress={shareProfile} />
+			<View style={styles.buttons}>
+				<Button text="Сохранить" onPress={submitProfile} />
+				<Button text="Поделиться" onPress={shareProfile} />
+			</View>
 		</View>
 	);
 }
@@ -54,5 +56,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingHorizontal: 30,
 		paddingVertical: 20,
+	},
+	buttons: {
+		gap: Gaps.g20,
+		paddingHorizontal: 20,
 	},
 });

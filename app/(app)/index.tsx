@@ -61,7 +61,7 @@ export default function MyCourses() {
 			{isLoading && (
 				<ActivityIndicator style={styles.activity} size="large" color={Colors.primary} />
 			)}
-			<Button text="Напомнить" onPress={scheduleNotification} />
+			<Button style={styles.button} text="Напомнить" onPress={scheduleNotification} />
 			{courses.length > 0 && (
 				<FlatList
 					refreshControl={
@@ -87,5 +87,8 @@ const styles = StyleSheet.create({
 	},
 	activity: {
 		marginTop: 30,
+	},
+	button: {
+		marginTop: 10,
 	},
 });
