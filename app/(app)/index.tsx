@@ -48,6 +48,17 @@ export default function MyCourses() {
 		if (!granted) {
 			await requestPermissions();
 		}
+		// Local Notification
+		// Notificaitons.scheduleNotificationAsync({
+		// 	content: {
+		// 		title: 'Новый курс!!!',
+		// 		body: 'Начни учиться прямо сейчас на курсе TypeScript',
+		// 		data: { alias: 'typescript' },
+		// 	},
+		// 	trigger: {
+		// 		seconds: 3,
+		// 	},
+		// });
 		if (Device.isDevice) {
 			const token = await Notificaitons.getExpoPushTokenAsync({
 				projectId: Constants.expoConfig?.extra?.eas.projectId,

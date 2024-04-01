@@ -36,6 +36,13 @@
             "./assets/fonts/FiraSans-SemiBold.ttf"
           ]
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icons/NotificationIcon.png",
+          "color": "#16171D"
+        }
       ]
     ],
     "scheme": "purpleschool"

@@ -8,7 +8,7 @@ import { CustomDrawer } from '../../widget/layout/ui/CustomDrawer/CustomDrawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 
-export default function AppRayout() {
+export default function AppLayout() {
 	const { access_token } = useAtomValue(authAtom);
 	if (!access_token) {
 		return <Redirect href="/login" />;
